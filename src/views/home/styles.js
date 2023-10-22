@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     },
 
     top: {
-        flex: 0.08,
+        flex: 0.1,
         flexDirection: 'row', 
         alignItems: 'center',
         backgroundColor: colors.primary,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20, 
         borderRadius: 50,
         marginHorizontal: 20,
-        marginTop: 20,
+        marginTop: 27,
         marginBottom: 10
     },
     search : {
@@ -131,7 +131,8 @@ const styles = StyleSheet.create({
     column: {
         flexDirection: 'column', 
         alignItems: 'center',
-        margin: 9,
+        marginHorizontal: 35,
+        marginVertical: 8
     },
 
     text: {
@@ -144,6 +145,11 @@ const styles = StyleSheet.create({
     image: {
         height: 50, 
         width: 50
+    },
+
+    imageTranslate: {
+        height: 45, 
+        width: 45
     },
 
     midView: {

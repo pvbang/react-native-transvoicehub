@@ -1,7 +1,7 @@
 const strings = {
     // bỏ dấu cách đi   
-    GOOGLE_API_KEY: 'AIzaSyDLj0iPsxy G9EDNAMTZ-M X_CD5jkZc4gN0',     
-    OPEN_AI_KEY: 'sk-Em8yQaLGIbJS q17lipdST3BlbkFJ90 gnyhUuMh7uQUkb0dGq',
+    GOOGLE_API_KEY: 'AIzaSyDNj 0aGEgZcQQu pM6-oSs_ KgOI1ALP5eSI',     
+    OPEN_AI_KEY: 'sk-uQ 1QCEa K3GKw sDlX UXScT 3BlbkF JHgiOyBh GfxAzO2I xoQwG',
 };
 
 export default strings;

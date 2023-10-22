@@ -1,16 +1,32 @@
-import { Text, View, StatusBar, TouchableOpacity, Image, TextInput } from 'react-native';
+import { Text, View, StatusBar, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import React, { useState, useEffect } from 'react';
+import Clipboard from '@react-native-community/clipboard';
+import { useClipboard } from '@react-native-community/clipboard';
+import SoundPlayer from 'react-native-sound-player';
+import Tts from 'react-native-tts';
 
 import styles from './styles';
 import colors from '../../constants/colors';
 import strings from '../../constants/string';
 
 const TranslateScreen = (props) => {
-  const [inputLanguage, setInputLanguage] = useState('English');
-  const [outputLanguage, setOutputLanguage] = useState('Vietnamese');
+  const [inputLanguage, setInputLanguage] = useState('Vietnamese');
+  const [outputLanguage, setOutputLanguage] = useState('English');
   const [textTranslate, setTextTranslate] = useState('');
   const [result, setResult] = useState('');
-  const [target, setTarget] = useState('vi');
+  const [target, setTarget] = useState('en');
+  const [transPlaceholderText, setTransPlaceholderText] = useState('Nhập văn bản');
+
+  const [dataClipboard, setStringClipboard] = useClipboard();
+
+  const pasteFromClipboard = async () => {
+    let clipboardContent = await Clipboard.getString();
+    setTextTranslate(clipboardContent);
+  };
+
+  const writeToClipboard = async (text) => {
+    Clipboard.setString(text);
+  };
 
   const translation = (text) => {
     return new Promise((resolve, reject) => {
@@ -40,10 +56,20 @@ const TranslateScreen = (props) => {
       setInputLanguage("Vietnamese");
       setOutputLanguage("English");
       setTarget('en');
+      setTransPlaceholderText("Nhập văn bản");
     } else {
       setInputLanguage("English");
       setOutputLanguage("Vietnamese");
       setTarget('vi');
+      setTransPlaceholderText("Enter text");
+    }
+  }
+
+  const sound = (text) => {
+    try {
+      Tts.speak(text);
+    } catch (e) {
+      console.log(e)
     }
   }
 
@@ -62,16 +88,25 @@ const TranslateScreen = (props) => {
         <Text style={styles.textTop}>Translate</Text>
       </View>
 
-      <View style={styles.content}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.row}>
-          <Text style={styles.textTrans}>{inputLanguage}</Text>
-          <Image source={require('../../images/sound.png')} style={styles.sound} />
+          <Text style={styles.textTransInput}>{inputLanguage}</Text>
+          <TouchableOpacity style={styles.cancel} onPress={() => setTextTranslate("")}>
+            <Image source={require('../../images/cancel.png')} style={styles.cancelImage} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.copy} onPress={() => writeToClipboard(textTranslate)}>
+            <Image source={require('../../images/copy.png')} style={styles.copyImage} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sound} onPress={() => sound(textTranslate)}>
+            <Image source={require('../../images/speaker-filled-audio-tool.png')} style={styles.soundImage} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.transView}>
           <TextInput
             style={styles.translateInput}
-            placeholder="Nhập từ hoặc câu mà bạn muốn dịch"
+            placeholder={transPlaceholderText}
+            placeholderTextColor={colors.gray}
             value={textTranslate}
             multiline={true}
             numberOfLines={1}
@@ -85,25 +120,35 @@ const TranslateScreen = (props) => {
           />
         </View>
 
-        <View style={styles.row}>
-          <Text style={styles.textTrans}>{outputLanguage}</Text>
-          <Image source={require('../../images/sound.png')} style={styles.sound} />
-        </View>
+        {!textTranslate &&
+          <TouchableOpacity style={styles.paste} onPress={() => pasteFromClipboard()}>
+            <Image source={require('../../images/paste.png')} style={styles.pasteImage} />
+            <Text style={styles.pasteText}>Dán</Text>
+          </TouchableOpacity>
+        }
+        {textTranslate &&
+          <View>
+            <View style={styles.hrView}></View>
 
-        <View style={styles.transView}>
-          <TextInput
-            style={styles.translateInput}
-            value={result}
-            multiline={true}
-            numberOfLines={1}
-          />
-        </View>
-      </View>
+            <View style={styles.row}>
+              <Text style={styles.textTransOutput}>{outputLanguage}</Text>
+              <TouchableOpacity style={styles.copy} onPress={() => writeToClipboard(result)}>
+                <Image source={require('../../images/copy-primary.png')} style={styles.copyImage} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.sound} onPress={() => sound(result)}>
+                <Image source={require('../../images/speaker-filled-audio-tool-primary.png')} style={styles.soundImage} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.transView}>
+              <Text style={styles.translateOutput}>{result}</Text>
+            </View>
 
+          </View>
+        }
+      </ScrollView>
 
       <View style={styles.bottom}>
-        <TouchableOpacity style={styles.inputLanguage}
-          onPress={() => console.log(inputLanguage)}>
+        <TouchableOpacity style={styles.inputLanguage}>
           <Text style={styles.textLanguage}>{inputLanguage}</Text>
         </TouchableOpacity>
 
@@ -112,8 +157,7 @@ const TranslateScreen = (props) => {
           <Image style={styles.imageReverse} source={require('../../images/reverse.png')} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.outputLanguage}
-          onPress={() =>console.log(outputLanguage)}>
+        <TouchableOpacity style={styles.outputLanguage}>
           <Text style={styles.textLanguage}>{outputLanguage}</Text>
         </TouchableOpacity>
       </View>

@@ -81,35 +81,13 @@ const HomeScreen = props => {
         }
     }
 
-    const user = async () => {
-        try {
-            const id = await AsyncStorage.getItem('@id_user')
-
-            if (id != null) {
-                props.navigation.navigate('User');
-            } else {
-                props.navigation.navigate('Login')
-            }
-
-        } catch (e) {
-            console.log(e)
-        }
-    }
 
     return (
         <View style={styles.container}>
             <StatusBar animated={true} backgroundColor={colors.primary} barStyle='light-content' />
 
             <View style={styles.top}>
-                <Text style={styles.textTop}>Vocab Master</Text>
-                <TouchableOpacity style={styles.back}
-                    onPress={() => {
-                        user();
-                    }}
-                >
-                    <Image source={require('../../images/user.png')} style={styles.backImg} />
-                </TouchableOpacity>
-
+                <Text style={styles.textTop}>TRANS VOICE HUB</Text>
             </View>
 
             <View style={styles.content}>
@@ -117,8 +95,9 @@ const HomeScreen = props => {
                     <Image source={require('../../images/search.png')} style={styles.imgSearch} />
                     <TextInput
                         style={styles.search}
-                        placeholder="Tìm kiếm từ vựng"
+                        placeholder="Tìm kiếm từ"
                         value={searchQuery}
+                        placeholderTextColor={colors.gray_dark}
                         onChangeText={(text) => {
                             setSearchQuery(text);
                             filterData(text);
@@ -166,10 +145,10 @@ const HomeScreen = props => {
 
                 <ScrollView style={styles.midView} showsVerticalScrollIndicator={false}>
                     <View style={styles.flatView}>
-                        <Text style={styles.flatText}>Nhận diện từ vựng bằng hình ảnh</Text>
-                        <Text style={styles.flatText2}>Camera AI</Text>
+                        <Text style={styles.flatText}>Dịch đoạn văn, từ vựng</Text>
+                        <Text style={styles.flatText2}>Translate</Text>
 
-                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('CameraAI')}>
+                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('Translate')}>
                             <Text style={styles.flatButtonText}>Khám phá</Text>
                         </TouchableOpacity>
                     </View>
@@ -183,74 +162,27 @@ const HomeScreen = props => {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={styles.flatView}>
-                        <Text style={styles.flatText}>Dịch đoạn văn, từ vựng</Text>
-                        <Text style={styles.flatText2}>Translate</Text>
-
-                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('Translate')}>
-                            <Text style={styles.flatButtonText}>Khám phá</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.flatView}>
-                        <Text style={styles.flatText}>Các từ vựng đã được đánh dấu</Text>
-                        <Text style={styles.flatText2}>Bookmark</Text>
-
-                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('Bookmark')}>
-                            <Text style={styles.flatButtonText}>Khám phá</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.flatView}>
-                        <Text style={styles.flatText}>Danh sách các từ vựng</Text>
-                        <Text style={styles.flatText2}>Từ vựng</Text>
-
-                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('Vocabulary')}>
-                            <Text style={styles.flatButtonText}>Khám phá</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.flatView}>
-                        <Text style={styles.flatText}>Lịch sử tìm kiếm</Text>
-                        <Text style={styles.flatText2}>History</Text>
-
-                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('History')}>
-                            <Text style={styles.flatButtonText}>Khám phá</Text>
-                        </TouchableOpacity>
-                    </View>
                 </ScrollView>
 
                 <View style={styles.bottom}>
                     <View style={styles.center}>
                         <View style={styles.row}>
                             <TouchableOpacity style={styles.column}
-                                onPress={() => props.navigation.navigate('CameraAI')}>
-                                <Image style={styles.image} source={require('../../images/camera.png')} />
-                                <Text style={styles.text}>Camera AI</Text>
+                                onPress={() => props.navigation.navigate('Translate')}>
+                                <Image style={styles.image} source={require('../../images/logo.png')} />
+                                <Text style={styles.text}>Speech</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={styles.column}
+                                onPress={() => props.navigation.navigate('Translate')}>
+                                <Image style={styles.imageTranslate} source={require('../../images/translate.png')} />
+                                <Text style={styles.text}>Translate</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.column}
                                 onPress={() => props.navigation.navigate('ChatGPT')}>
                                 <Image style={styles.image} source={require('../../images/chatgpt.png')} />
                                 <Text style={styles.text}>Chat AI</Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity style={styles.column}
-                                onPress={() => props.navigation.navigate('Translate')}>
-                                <Image style={styles.image} source={require('../../images/logo.png')} />
-                                <Text style={styles.text}>Translate</Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity style={styles.column}
-                                onPress={() => props.navigation.navigate('Exercises')}>
-                                <Image style={styles.image} source={require('../../images/english.png')} />
-                                <Text style={styles.text}>Bài tập</Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity style={styles.column}
-                                onPress={() => props.navigation.navigate('Vocabulary')}>
-                                <Image style={styles.image} source={require('../../images/books.png')} />
-                                <Text style={styles.text}>Từ vựng</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

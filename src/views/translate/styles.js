@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../constants/colors';
+import { FullWindowOverlay } from 'react-native-screens';
 
 const styles = StyleSheet.create({
     container: {
@@ -36,28 +37,46 @@ const styles = StyleSheet.create({
     },
 
     top: {
-        flex: 0.08,
+        height: 70,
         flexDirection: 'row', 
         alignItems: 'center',
         backgroundColor: colors.primary,
     },
     content: {
-        flex: 0.92,
+        // flex: 0.92,
+        marginBottom: 90,
     },
 
     translateInput : {
         borderRadius: 10,
         padding: 10,
         textAlignVertical: "top",
-        fontSize: 19,
-        color: colors.primary
+        fontSize: 30,
+        color: colors.primary_black,
+        fontWeight: 'bold',
     },
 
-    textTrans: {
-        fontSize: 20,
-        color: colors.black,
-        marginStart: 22,
+    translateOutput : {
+        borderRadius: 10,
+        padding: 10,
+        textAlignVertical: "top",
+        fontSize: 30,
+        color: colors.primary,
         fontWeight: 'bold',
+    },
+
+    textTransInput: {
+        fontSize: 17,
+        color: colors.primary_black,
+        marginStart: 20,
+        marginTop: 10
+    },
+
+    textTransOutput: {
+        fontSize: 17,
+        color: colors.primary,
+        marginStart: 20,
+        marginTop: 20
     },
 
     row: {
@@ -65,23 +84,81 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20
     },
+   
+    paste: {
+        flexDirection: 'row', 
+        alignItems: 'center',
+        backgroundColor: colors.gray_white,
+        paddingHorizontal: 25,
+        width: 100,
+        height: 45,
+        borderRadius: 100,
+        marginStart: 17,
+        marginTop: 40
+    },
+    pasteImage: {
+        width: 20,
+        height: 20,
+    },
+    pasteText: {
+        color: colors.primary_black,
+        marginLeft: 5
+    },
+    cancel: {
+        width: 14,
+        height: 14,
+        position: 'absolute',
+        right: 117,
+        bottom: 0
+    },
+    cancelImage: {
+        width: 14,
+        height: 14,
+    },
+    copy: {
+        width: 18,
+        height: 18,
+        position: 'absolute',
+        right: 70,
+        bottom: -1,
+    },
+    copyImage: {
+        width: 18,
+        height: 18,
+    },
     sound: {
-        width: 24,
-        height: 24,
+        width: 22,
+        height: 22,
         position: 'absolute',
         right: 20,
+        bottom: -3
+    },
+    soundImage: {
+        width: 22,
+        height: 22,
     },
 
     transView: {
-        marginVertical: 20,
-        borderWidth: 13, 
+        marginTop: 0,
+        // borderWidth: 20, 
         borderColor: colors.white, 
-        borderRadius: 1,
-        elevation: 5,
-        shadowColor: colors.primary_black, 
-        shadowOffset: { width: 0, height: 2 }, 
+        // borderRadius: 1,
+        // elevation: 1,
+        // shadowColor: colors.primary_black, 
+        // shadowOffset: { width: 0, height: 2 }, 
         shadowOpacity: 0.5, 
-        shadowRadius: 10,
+        padding: 10,
+        // shadowRadius: 10,
+    },
+
+    hrView: {
+        backgroundColor: colors.gray_white_2,
+        width: 200,
+        height: 3,
+        borderRadius: 5,
+        alignSelf: 'center',
+        alignItems: 'center',
+        marginTop: 20
     },
 
     bottom: {

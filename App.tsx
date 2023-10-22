@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoadingScreen from './src/views/loading/LoadingScreen';
-// import RootNavigator from './src/routes/RootNavigator';
+import RootNavigator from './src/routes/RootNavigator';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,8 +14,8 @@ const App = () => {
   if (isLoading) {
     return <LoadingScreen />;
   }
-  return <LoadingScreen />;
-  // return <RootNavigator />;
+  // return <LoadingScreen />;
+  return <RootNavigator />;
   
 }
 

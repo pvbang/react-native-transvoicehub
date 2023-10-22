@@ -9,7 +9,7 @@ const LoadingScreen = () => {
       <StatusBar animated={true} backgroundColor={colors.white} barStyle="light-content" />
       
       <Image source={require('../../images/logo.png')} style={styles.image} />
-      <Text style={styles.text}>Vocab Master</Text>
+      <Text style={styles.text}>TransVoiceHub</Text>
     </View>
   );
 };
