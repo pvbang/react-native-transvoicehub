@@ -166,11 +166,21 @@ const styles = StyleSheet.create({
         borderColor: colors.green2,
         marginBottom: 15
     },
+    flatView2: {
+        backgroundColor: colors.primary,
+        width: '100%',
+        height: 150,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: colors.green2,
+        marginBottom: 15
+    },
     flatText: {
         marginHorizontal: 30,
         marginTop: 20,
         color: colors.white,
         fontSize: 16,
+        lineHeight: 24,
     },
     flatText2: {
         marginStart: 30,

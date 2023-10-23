@@ -145,6 +145,15 @@ const HomeScreen = props => {
 
                 <ScrollView style={styles.midView} showsVerticalScrollIndicator={false}>
                     <View style={styles.flatView}>
+                        <Text style={styles.flatText}>Sử dụng voice để trò chuyện</Text>
+                        <Text style={styles.flatText2}>Conversation</Text>
+
+                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('Translate')}>
+                            <Text style={styles.flatButtonText}>Khám phá</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.flatView}>
                         <Text style={styles.flatText}>Dịch đoạn văn, từ vựng</Text>
                         <Text style={styles.flatText2}>Translate</Text>
 
@@ -153,7 +162,7 @@ const HomeScreen = props => {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={styles.flatView}>
+                    <View style={styles.flatView2}>
                         <Text style={styles.flatText}>Trò chuyện cùng với AI để cải thiện khả năng giao tiếp</Text>
                         <Text style={styles.flatText2}>Chat AI</Text>
 

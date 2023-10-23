@@ -148,7 +148,7 @@ const TranslateScreen = (props) => {
       </ScrollView>
 
       <View style={styles.bottom}>
-        <TouchableOpacity style={styles.inputLanguage}>
+        <TouchableOpacity style={styles.inputLanguage} onPress={() => props.navigation.navigate('Language')}>
           <Text style={styles.textLanguage}>{inputLanguage}</Text>
         </TouchableOpacity>
 

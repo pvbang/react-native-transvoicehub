@@ -11,6 +11,7 @@ import TranslateScreen from '../views/translate/TranslateScreen';
 // import ExercisesScreen from '../views/exercises/ExercisesScreen';
 import VocabularyScreen from '../views/vocabulary/VocabularyScreen';
 import MeaningScreen from '../views/meaning/MeaningScreen';
+import LanguageScreen from '../views/language/LanguageScreen';
 import RegisterScreen from '../views/register/RegisterScreen';
 import LoginScreen from '../views/login/LoginScreen';
 import UserScreen from '../views/user/UserScreen';
@@ -51,6 +52,12 @@ const RootNavigator = () => {
           <Stack.Screen
              name="Meaning"
              component={MeaningScreen}
+             options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+             name="Language"
+             component={LanguageScreen}
              options={{ headerShown: false }}
           />
 

@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     },
     pasteText: {
         color: colors.primary_black,
-        marginLeft: 5
+        marginLeft: 6,
+        fontWeight: 'bold',
     },
     cancel: {
         width: 14,
