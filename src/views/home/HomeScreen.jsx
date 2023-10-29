@@ -148,7 +148,7 @@ const HomeScreen = props => {
                         <Text style={styles.flatText}>Sử dụng voice để trò chuyện</Text>
                         <Text style={styles.flatText2}>Conversation</Text>
 
-                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('Translate')}>
+                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('Speech')}>
                             <Text style={styles.flatButtonText}>Khám phá</Text>
                         </TouchableOpacity>
                     </View>
@@ -177,7 +177,7 @@ const HomeScreen = props => {
                     <View style={styles.center}>
                         <View style={styles.row}>
                             <TouchableOpacity style={styles.column}
-                                onPress={() => props.navigation.navigate('Translate')}>
+                                onPress={() => props.navigation.navigate('Speech')}>
                                 <Image style={styles.image} source={require('../../images/logo.png')} />
                                 <Text style={styles.text}>Speech</Text>
                             </TouchableOpacity>

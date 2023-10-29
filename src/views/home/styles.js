@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     searchView : {
         flexDirection: 'row', 
         alignItems: 'center', 
-        backgroundColor: colors.gray_white, 
+        backgroundColor: colors.gray_white_2, 
         paddingHorizontal: 20, 
         borderRadius: 50,
         marginHorizontal: 20,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         height: 64
     },
     searchResults : {
-        backgroundColor: colors.gray_search,
+        backgroundColor: colors.gray_white_2,
         marginHorizontal: 20,
         borderRadius: 10,
         paddingHorizontal: 20,

@@ -8,6 +8,7 @@ import HomeScreen from '../views/home/HomeScreen';
 import ChatGPTScreen from '../views/chatgpt/ChatGPTScreen';
 // import CameraScreen from '../views/camera/CameraScreen';
 import TranslateScreen from '../views/translate/TranslateScreen';
+import SpeechScreen from '../views/speech/SpeechScreen';
 // import ExercisesScreen from '../views/exercises/ExercisesScreen';
 import VocabularyScreen from '../views/vocabulary/VocabularyScreen';
 import MeaningScreen from '../views/meaning/MeaningScreen';
@@ -70,6 +71,12 @@ const RootNavigator = () => {
           <Stack.Screen
             name="Translate"
             component={TranslateScreen}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="Speech"
+            component={SpeechScreen}
             options={{ headerShown: false }}
           />
 

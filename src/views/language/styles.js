@@ -82,14 +82,98 @@ const styles = StyleSheet.create({
     },
 
     buttonLanguage: {
-        backgroundColor: colors.gray_white_2,
+        // backgroundColor: colors.gray_white_2,
         marginHorizontal: 5,
         marginVertical: 8,
         paddingHorizontal: 13,
         paddingVertical: 10,
         borderRadius: 100
-    }
+    },
+
+    buttonMyLang: {
+        backgroundColor: colors.primary,
+        marginHorizontal: 5,
+        marginVertical: 8,
+        paddingHorizontal: 13,
+        paddingVertical: 10,
+        borderRadius: 100
+    },
+    viewMyLangTextResults : {
+        flexDirection: 'row', 
+        // marginVertical: 10
+    },
+    textMyLangResults : {
+        marginVertical: 10,
+        color: colors.white,
+        fontSize: 20,
+        marginHorizontal: 14,
+        // fontWeight: 'bold',
+    },
+    hrView: {
+        backgroundColor: colors.gray_white_2,
+        width: 100,
+        height: 5,
+        borderRadius: 5,
+        alignSelf: 'center',
+        alignItems: 'center',
+        margin: 20
+    },
+
+    chooseLangView: {
+        // backgroundColor: 'red'
+    },
+    chooseLangText: {
+        fontSize: 16,
+        color: colors.primary,
+        fontWeight: 'bold',
+        marginStart: 32,
+        marginVertical: 10
+    },
     
+
+    searchView: {
+        flexDirection: 'row',
+        backgroundColor: colors.white,
+        borderRadius: 100,
+        width: 220,
+        height: 45,
+        marginTop: 5,
+        marginLeft: 'auto', 
+        marginEnd: 13,
+    },
+    search : {
+        flex: 1, 
+        marginLeft: 10,
+        fontSize: 16,
+    },
+    imgSearch: {
+        width: 20,
+        height: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        marginStart: 20
+    },
+    imgVoice: {
+        width: 20,
+        height: 20,
+    },
+    imgReject : {
+        width: 20,
+        height: 20,
+        marginHorizontal: 15,
+        top: 12,
+    },
+    imgTopLeft: {
+        width: 20,
+        height: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        position: 'absolute',
+        right: 0
+    },
+
 });
 
 export default styles;
