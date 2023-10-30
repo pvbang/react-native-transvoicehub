@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     content: {
         // flex: 0.92,
-        marginBottom: 90,
+        marginBottom: 110,
     },
 
     translateInput : {
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical: 30,
         borderRadius: 100,
-        margin: 15,
+        marginBottom: 15,
     },
     imageReverse: {
         height: 25,
@@ -205,6 +205,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         marginHorizontal: 25,
+    },
+
+    searchResults : {
+        // backgroundColor: colors.black_2,
+        paddingLeft: 1,
+        paddingRight: 1,
+        marginBottom: 130,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30
     },
     
 });

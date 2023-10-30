@@ -1,4 +1,4 @@
-import { Text, View, StatusBar, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
+import { Text, View, StatusBar, TouchableOpacity, Image, TextInput, ScrollView, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import Clipboard from '@react-native-community/clipboard';
 import { useClipboard } from '@react-native-community/clipboard';
@@ -21,6 +21,13 @@ const SpeechScreen = (props) => {
 
   const [transLang1, setTransLang1] = useState('');
   const [transLang2, setTransLang2] = useState('');
+
+  const [conversations, setConversations] = useState([
+    { language: "English", trans: "hello" },
+    { language: "Vietnamese", trans: "xin chào" },
+    // Thêm các cặp ngôn ngữ và câu chào khác nếu cần
+  ]);
+  
 
   const [activeTrans1, setActiveTrans1] = useState(false);
   const [activeTrans2, setActiveTrans2] = useState(false);
@@ -155,7 +162,7 @@ const SpeechScreen = (props) => {
         <Text style={styles.textTop}>Speech</Text>
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      {/* <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View>
           <View style={styles.row}>
             <Text style={styles.textTransInput}>{transLang1}</Text>
@@ -181,7 +188,30 @@ const SpeechScreen = (props) => {
           </View>
         </View>
 
-      </ScrollView>
+      </ScrollView> */}
+
+      <View style={styles.content}>
+        <FlatList
+          data={conversations}
+          renderItem={({ item }) => (
+            <View>
+              <View style={styles.row}>
+                <Text style={styles.textTransInput}>{item.language}</Text>
+                <TouchableOpacity style={styles.sound} onPress={() => sound(item.trans)}>
+                  <Image source={require('../../images/speaker-filled-audio-tool-primary.png')} style={styles.soundImage} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.transView}>
+                <Text style={styles.translateOutput}>{item.trans}</Text>
+              </View>
+              <View style={styles.hrView}></View>
+            </View>
+
+          )}
+          keyExtractor={(item) => item.trans}
+          style={styles.searchResults}
+        />
+      </View>
 
       <View style={styles.bottom}>
         <View style={styles.lang}>
