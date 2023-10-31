@@ -87,7 +87,7 @@ const HomeScreen = props => {
             <StatusBar animated={true} backgroundColor={colors.primary} barStyle='light-content' />
 
             <View style={styles.top}>
-                <Text style={styles.textTop}>TRANS VOICE HUB</Text>
+                <Text style={styles.textTop}>TRANSVOICE HUB</Text>
             </View>
 
             <View style={styles.content}>

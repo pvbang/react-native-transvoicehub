@@ -4,6 +4,7 @@ import Clipboard from '@react-native-community/clipboard';
 import { useClipboard } from '@react-native-community/clipboard';
 import SoundPlayer from 'react-native-sound-player';
 import Tts from 'react-native-tts';
+import Voice from '@react-native-voice/voice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from './styles';
@@ -22,15 +23,12 @@ const SpeechScreen = (props) => {
   const [transLang1, setTransLang1] = useState('');
   const [transLang2, setTransLang2] = useState('');
 
-  const [conversations, setConversations] = useState([
-    { language: "English", trans: "hello" },
-    { language: "Vietnamese", trans: "xin chào" },
-    // Thêm các cặp ngôn ngữ và câu chào khác nếu cần
-  ]);
-  
+  const [conversations, setConversations] = useState([]);
 
   const [activeTrans1, setActiveTrans1] = useState(false);
   const [activeTrans2, setActiveTrans2] = useState(false);
+
+  const [lastVoiceLang, setLastVoiceLang] = useState('');
 
   // const [dataClipboard, setStringClipboard] = useClipboard();
 
@@ -127,10 +125,6 @@ const SpeechScreen = (props) => {
     }
   }
 
-  const transConversation = () => {
-
-  }
-
   useEffect(() => {
     getTransLanguage();
   }, [])
@@ -142,10 +136,64 @@ const SpeechScreen = (props) => {
   }, []);
 
   useEffect(() => {
+    Voice.onSpeechStart = speechStartHandler;
+    Voice.onSpeechEnd = speechEndHandler;
+    Voice.onSpeechResults = speechResultsHandler;
+    return () => {
+      Voice.destroy().then(Voice.removeAllListeners);
+    };
+  }, []);
+
+  useEffect(() => {
     translation(textTranslate).then(translatedText => {
       setResult(translatedText);
     }).catch(error => { console.log("useEffect translation: ", error); });
   }, [transLang2])
+
+  const speechStartHandler = e => {
+    console.log('start record', e);
+  };
+  const speechEndHandler = e => {
+    setActiveTrans1(false);
+    setActiveTrans2(false);
+    console.log("lastVoiceLang: ", lastVoiceLang);
+    console.log('stop record', e);
+  };
+  const speechResultsHandler = e => {
+    const text = e.value[0];
+    console.log("lastVoiceLang: ", lastVoiceLang);
+    const newConversation = { language: lastVoiceLang, trans: text };
+    const updatedConversations = [...conversations, newConversation];
+    setConversations(updatedConversations);
+   
+    console.log("text record: ", text);
+  };
+
+  const startRecording1 = async () => {
+    try {
+      var target = languageLists[transLang1];
+      await Voice.start(target);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+  const stopRecording = async () => {
+    try {
+      await Voice.stop();
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  const startRecording2 = async () => {
+    try {
+      var target = languageLists[transLang2];
+      await Voice.start(target);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
 
   return (
     <View style={styles.container}>
@@ -161,34 +209,6 @@ const SpeechScreen = (props) => {
         </TouchableOpacity>
         <Text style={styles.textTop}>Speech</Text>
       </View>
-
-      {/* <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View>
-          <View style={styles.row}>
-            <Text style={styles.textTransInput}>{transLang1}</Text>
-            <TouchableOpacity style={styles.sound} onPress={() => sound(result)}>
-              <Image source={require('../../images/speaker-filled-audio-tool-primary.png')} style={styles.soundImage} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.transView}>
-            <Text style={styles.translateOutput}>trans</Text>
-          </View>
-        </View>
-
-        <View>
-          <View style={styles.hrView}></View>
-          <View style={styles.row}>
-            <Text style={styles.textTransInput}>{transLang2}</Text>
-            <TouchableOpacity style={styles.sound} onPress={() => sound(result)}>
-              <Image source={require('../../images/speaker-filled-audio-tool-primary.png')} style={styles.soundImage} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.transView}>
-            <Text style={styles.translateOutput}>trans</Text>
-          </View>
-        </View>
-
-      </ScrollView> */}
 
       <View style={styles.content}>
         <FlatList
@@ -208,7 +228,7 @@ const SpeechScreen = (props) => {
             </View>
 
           )}
-          keyExtractor={(item) => item.trans}
+          keyExtractor={(item) => item.trans + Math.floor(Math.random() * 999999)}
           style={styles.searchResults}
         />
       </View>
@@ -225,11 +245,15 @@ const SpeechScreen = (props) => {
           {activeTrans1 === false ?
             <TouchableOpacity style={styles.outputLanguage} onPress={() => {
               setActiveTrans1(true);
+              setLastVoiceLang(transLang1);
+              startRecording1();
             }}>
               <Image style={styles.imageReverse} source={require('../../images/mic-white-deactive.png')} />
             </TouchableOpacity>
             : <TouchableOpacity style={styles.inputLanguage} onPress={() => {
               setActiveTrans1(false);
+              setLastVoiceLang(transLang1);
+              stopRecording();
             }}>
               <Image style={styles.imageReverse} source={require('../../images/mic-white-active.png')} />
             </TouchableOpacity>
@@ -247,11 +271,15 @@ const SpeechScreen = (props) => {
           {activeTrans2 === false ?
             <TouchableOpacity style={styles.outputLanguage} onPress={() => {
               setActiveTrans2(true);
+              setLastVoiceLang(transLang2);
+              startRecording2();
             }}>
               <Image style={styles.imageReverse} source={require('../../images/mic-white-deactive.png')} />
             </TouchableOpacity>
             : <TouchableOpacity style={styles.inputLanguage} onPress={() => {
               setActiveTrans2(false);
+              setLastVoiceLang(transLang2);
+              stopRecording();
             }}>
               <Image style={styles.imageReverse} source={require('../../images/mic-white-active.png')} />
             </TouchableOpacity>

@@ -27,7 +27,7 @@ const VocabularyScreen = props => {
   const clearSearch = () => {
     setSearchQuery('');
     setSearchResults(words);
-    setShowResults(false);  // Ẩn danh sách kết quả tìm kiếm
+    setShowResults(false);  
   }
 
   useEffect(() => {
