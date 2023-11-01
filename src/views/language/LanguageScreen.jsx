@@ -120,8 +120,9 @@ const LanguageScreen = (props) => {
                     <Image source={require('../../images/search.png')} style={styles.imgSearch} />
                     <TextInput
                         style={styles.search}
-                        placeholder="Tìm kiếm ngôn ngữ"
+                        placeholder="Tìm ngôn ngữ"
                         value={searchQuery}
+                        placeholderTextColor={colors.gray}
                         onChangeText={(text) => {
                             setSearchQuery(text);
                             filterData(text);

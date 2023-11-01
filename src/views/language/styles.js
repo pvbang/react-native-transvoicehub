@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: colors.white,
         borderRadius: 100,
-        width: 220,
+        width: 180,
         height: 45,
         marginTop: 5,
         marginLeft: 'auto', 
@@ -145,6 +145,8 @@ const styles = StyleSheet.create({
         flex: 1, 
         marginLeft: 10,
         fontSize: 16,
+        color: colors.primary_black,
+        
     },
     imgSearch: {
         width: 20,

@@ -30,6 +30,8 @@ const SpeechScreen = (props) => {
 
   const [lastVoiceLang, setLastVoiceLang] = useState('');
 
+  const [speechText, setSpeechText] = useState('');
+
   // const [dataClipboard, setStringClipboard] = useClipboard();
 
   const pasteFromClipboard = async () => {
@@ -127,7 +129,11 @@ const SpeechScreen = (props) => {
 
   useEffect(() => {
     getTransLanguage();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    console.log("last: ", lastVoiceLang);
+  }, [lastVoiceLang]);
 
   useEffect(() => {
     props.navigation.addListener('focus', () => {
@@ -156,18 +162,23 @@ const SpeechScreen = (props) => {
   const speechEndHandler = e => {
     setActiveTrans1(false);
     setActiveTrans2(false);
-    console.log("lastVoiceLang: ", lastVoiceLang);
     console.log('stop record', e);
   };
   const speechResultsHandler = e => {
     const text = e.value[0];
-    console.log("lastVoiceLang: ", lastVoiceLang);
-    const newConversation = { language: lastVoiceLang, trans: text };
-    const updatedConversations = [...conversations, newConversation];
-    setConversations(updatedConversations);
-   
+    setSpeechText(text);
     console.log("text record: ", text);
   };
+
+
+  useEffect(() => {
+    if (lastVoiceLang) {
+      const newConversation = { language: lastVoiceLang, trans: speechText };
+      const updatedConversations = [...conversations, newConversation];
+      setConversations(updatedConversations);
+    }
+    
+  }, [speechText]);
 
   const startRecording1 = async () => {
     try {
@@ -184,7 +195,6 @@ const SpeechScreen = (props) => {
       console.log('error', error);
     }
   };
-
   const startRecording2 = async () => {
     try {
       var target = languageLists[transLang2];
@@ -194,6 +204,17 @@ const SpeechScreen = (props) => {
     }
   };
 
+  scrollToBottom = () => {
+    this.flatListRef.scrollToEnd({ animated: true });
+  }
+
+  onContentSizeChange = () => {
+    this.scrollToBottom();
+  }
+
+  onLayout = () => {
+    this.scrollToBottom();
+  }
 
   return (
     <View style={styles.container}>
@@ -230,6 +251,9 @@ const SpeechScreen = (props) => {
           )}
           keyExtractor={(item) => item.trans + Math.floor(Math.random() * 999999)}
           style={styles.searchResults}
+          onContentSizeChange={this.onContentSizeChange}
+          onLayout={this.onLayout}
+          ref={(ref) => (this.flatListRef = ref)}
         />
       </View>
 

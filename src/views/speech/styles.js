@@ -216,6 +216,9 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 30
     },
     
+    cancell:{
+        color: colors.black
+    }
 });
 
 export default styles;
