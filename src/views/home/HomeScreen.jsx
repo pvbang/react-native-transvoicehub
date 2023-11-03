@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, Image, StatusBar, TextInput, FlatList, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, Image, StatusBar, TextInput, FlatList, ScrollView, LogBox } from 'react-native';
 import Voice from '@react-native-voice/voice';
 
 import styles from './styles';
@@ -7,6 +7,7 @@ import colors from '../../constants/colors';
 import wordlist from '../../constants/wordlist.json';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const HomeScreen = props => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -162,15 +163,6 @@ const HomeScreen = props => {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={styles.flatView2}>
-                        <Text style={styles.flatText}>Trò chuyện cùng với AI để cải thiện khả năng giao tiếp</Text>
-                        <Text style={styles.flatText2}>Chat AI</Text>
-
-                        <TouchableOpacity style={styles.flatButtonView} onPress={() => props.navigation.navigate('ChatGPT')}>
-                            <Text style={styles.flatButtonText}>Khám phá</Text>
-                        </TouchableOpacity>
-                    </View>
-
                 </ScrollView>
 
                 <View style={styles.bottom}>
@@ -188,11 +180,6 @@ const HomeScreen = props => {
                                 <Text style={styles.text}>Translate</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.column}
-                                onPress={() => props.navigation.navigate('ChatGPT')}>
-                                <Image style={styles.image} source={require('../../images/chatgpt.png')} />
-                                <Text style={styles.text}>Chat AI</Text>
-                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>

@@ -260,11 +260,11 @@ const MeaningScreen = props => {
                     <Image source={require('../../images/back_white.png')} style={styles.backImg} />
                 </TouchableOpacity>
                 <Text style={styles.textTop}>{word}</Text>
-                <View style={styles.bookmarkView}>
+                {/* <View style={styles.bookmarkView}>
                     <TouchableOpacity onPress={changeBookmark}>
                         {bookmark ? <Image source={require('../../images/bookmark-check.png')} style={styles.bookmarkImage} /> : <Image source={require('../../images/bookmark.png')} style={styles.bookmarkImage} />}
                     </TouchableOpacity>
-                </View>
+                </View> */}
 
             </View>
 

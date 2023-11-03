@@ -43,10 +43,7 @@ const SpeechScreen = (props) => {
     Clipboard.setString(text);
   };
 
-  const translation = (text) => {
-    var target = languageLists[transLang2];
-    console.log("target: ", target);
-
+  const translation = (text, target) => {
     return new Promise((resolve, reject) => {
       fetch(`https://translation.googleapis.com/language/translate/v2?key=${strings.GOOGLE_API_KEY}`, {
         method: 'POST',
@@ -150,11 +147,11 @@ const SpeechScreen = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    translation(textTranslate).then(translatedText => {
-      setResult(translatedText);
-    }).catch(error => { console.log("useEffect translation: ", error); });
-  }, [transLang2])
+  // useEffect(() => {
+  //   translation(textTranslate).then(translatedText => {
+  //     setResult(translatedText);
+  //   }).catch(error => { console.log("useEffect translation: ", error); });
+  // }, [transLang2])
 
   const speechStartHandler = e => {
     console.log('start record', e);
@@ -174,10 +171,26 @@ const SpeechScreen = (props) => {
   useEffect(() => {
     if (lastVoiceLang) {
       const newConversation = { language: lastVoiceLang, trans: speechText };
-      const updatedConversations = [...conversations, newConversation];
-      setConversations(updatedConversations);
+      const upConversations = [...conversations, newConversation];
+
+      if (lastVoiceLang === transLang1) {
+        var target = languageLists[transLang2];
+        translation(speechText, target).then(translatedText => {
+          var newConversation2 = { language: transLang2, trans: translatedText };
+          var updatedConversations = [...upConversations, newConversation2];
+          setConversations(updatedConversations);
+          sound(translatedText);
+        }).catch(error => { console.log("useEffect translation: ", error); });
+      } else {
+        var target = languageLists[transLang1];
+        translation(speechText, target).then(translatedText => {
+          var newConversation2 = { language: transLang1, trans: translatedText };
+          var updatedConversations = [...upConversations, newConversation2];
+          setConversations(updatedConversations);
+          sound(translatedText);
+        }).catch(error => { console.log("useEffect translation: ", error); });
+      }
     }
-    
   }, [speechText]);
 
   const startRecording1 = async () => {
@@ -234,8 +247,9 @@ const SpeechScreen = (props) => {
       <View style={styles.content}>
         <FlatList
           data={conversations}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <View>
+              {index === 0 ? <View style={styles.marginIndex0}></View> : <View></View>}
               <View style={styles.row}>
                 <Text style={styles.textTransInput}>{item.language}</Text>
                 <TouchableOpacity style={styles.sound} onPress={() => sound(item.trans)}>
@@ -245,9 +259,8 @@ const SpeechScreen = (props) => {
               <View style={styles.transView}>
                 <Text style={styles.translateOutput}>{item.trans}</Text>
               </View>
-              <View style={styles.hrView}></View>
+              {index % 2 === 1 ? <View style={styles.hrView}></View> : null}
             </View>
-
           )}
           keyExtractor={(item) => item.trans + Math.floor(Math.random() * 999999)}
           style={styles.searchResults}

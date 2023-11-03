@@ -54,13 +54,14 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: colors.primary_black,
         fontWeight: 'bold',
+        
     },
 
     translateOutput : {
         borderRadius: 10,
         padding: 10,
         textAlignVertical: "top",
-        fontSize: 30,
+        fontSize: 22,
         color: colors.primary,
         fontWeight: 'bold',
     },
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: colors.primary_black,
         marginStart: 20,
-        marginTop: 10
+        marginTop: 10,
     },
 
     textTransOutput: {
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row', 
         alignItems: 'center',
-        marginTop: 20
     },
    
     paste: {
@@ -148,18 +148,20 @@ const styles = StyleSheet.create({
         // shadowColor: colors.primary_black, 
         // shadowOffset: { width: 0, height: 2 }, 
         shadowOpacity: 0.5, 
-        padding: 10,
+        paddingHorizontal: 10,
         // shadowRadius: 10,
+        // backgroundColor: colors.black,
     },
 
     hrView: {
-        backgroundColor: colors.gray_white_2,
-        width: 200,
+        backgroundColor: colors.gray_search,
+        width: 100,
         height: 3,
         borderRadius: 5,
         alignSelf: 'center',
         alignItems: 'center',
-        marginTop: 7
+        marginTop: 15,
+        marginBottom: 15
     },
 
     bottom: {
@@ -218,6 +220,12 @@ const styles = StyleSheet.create({
     
     cancell:{
         color: colors.black
+    },
+
+
+    marginIndex0: {
+        margin: 7,
+        backgroundColor: colors.primary
     }
 });
 
